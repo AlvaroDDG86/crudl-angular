@@ -2,14 +2,50 @@
   "heroes": [
     {
       "id": 1,
-      "name": "Manolo"
+      "name": "Manolo2"
     },
     {
       "id": 4,
-      "name": "Julian"
+      "name": "Julianin"
     },
     {
       "id": 5,
+      "name": "Álvaro"
+    },
+    {
+      "id": 11,
+      "name": "Manolo"
+    },
+    {
+      "id": 14,
+      "name": "Julian"
+    },
+    {
+      "id": 15,
+      "name": "Álvaro"
+    },
+    {
+      "id": 21,
+      "name": "Manolo 3"
+    },
+    {
+      "id": 24,
+      "name": "Julian"
+    },
+    {
+      "id": 25,
+      "name": "Álvaro"
+    },
+    {
+      "id": 31,
+      "name": "Manolo"
+    },
+    {
+      "id": 34,
+      "name": "Julian"
+    },
+    {
+      "id": 35,
       "name": "Álvaro"
     }
   ]

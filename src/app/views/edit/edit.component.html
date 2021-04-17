@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="form-container">
+    <form [formGroup]="heroForm" (submit)="submit()">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> Name
+        </mat-label>
+        <input matInput formControlName="name" type="text">
+        <mat-error *ngIf="heroForm.controls.name.touched && heroForm.controls.name.invalid">
+          <span>This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-row">
+        <button mat-raised-button color="warn" type="button" (click)="cancelEdit()">Cancel</button>
+        <button mat-raised-button color="accent" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -36,7 +36,7 @@ export class HeroesService {
    * @param id id to get the Hero
    * Get Hero by id
    */
-  getHeroeById(id: number): Observable<Hero> {
+  getHeroById(id: String | null): Observable<Hero> {
     const url = `${BASE_URL}/heroes?id=${id}`
     return this.http.get<Hero[]>(url).pipe(mergeAll())
   }
