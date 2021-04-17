@@ -1,0 +1,11 @@
+.float-button {
+  position: fixed;
+  top: 75px;
+  right: 40px;
+}
+
+@media only screen and (max-width: 400px) {
+  .float-button {
+    position: initial;
+  }
+}

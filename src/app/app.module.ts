@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,9 +25,15 @@ import { EditComponent } from './views/edit/edit.component';
 import { AboutComponent } from './views/about/about.component';
 import { MainComponent } from './views/main/main.component';
 import { AppTableComponent } from './components/app-table/app-table.component';
-import { MatError, MatFormFieldModule } from '@angular/material/form-field';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppDialogComponent } from './components/app-dialog/app-dialog.component';
+import { HttpInterceptorInterceptor } from './interceptors/http-interceptor.interceptor'
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -39,7 +45,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     EditComponent,
     AboutComponent,
     MainComponent,
-    AppTableComponent
+    AppTableComponent,
+    AppDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +55,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HttpClientModule,
     LayoutModule,
     MatToolbarModule,
+    MatDialogModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
@@ -61,10 +69,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true }
+  ],
+  entryComponents: [AppDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

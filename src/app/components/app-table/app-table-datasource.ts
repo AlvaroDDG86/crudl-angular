@@ -22,9 +22,15 @@ export class AppTableDataSource extends DataSource<Hero> {
     this.heroesSubject.complete();
   }
 
-  loadHeroes() {
-    return this.heroesService.getHeroes().pipe(
-      catchError(() => of([]))
-    ).pipe(map(heroes => this.heroesSubject.next(heroes)));
+  loadHeroes(filter?: string) {
+    if (filter) {
+      return this.heroesService.getHeroesByName(filter).pipe(
+        catchError(() => of([]))
+      ).pipe(map(heroes => this.heroesSubject.next(heroes)));
+    } else {
+      return this.heroesService.getHeroes().pipe(
+        catchError(() => of([]))
+      ).pipe(map(heroes => this.heroesSubject.next(heroes)));
+    }
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../../models/Hero';
-import { HeroesService } from '../../services/heroes.service';
-import { Observable } from 'rxjs';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -9,11 +8,17 @@ import { Observable } from 'rxjs';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  heroes$?: Observable<Hero[]> | null;
+  searchForm: FormGroup = this.fb.group({
+    name: ['']
+  })
 
-  constructor(private heroService: HeroesService) { }
+  constructor(private router: Router,
+            private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.heroes$ = this.heroService.getHeroes();
+  }
+
+  addHero() {
+    this.router.navigate(['/edit', 'new'])
   }
 }

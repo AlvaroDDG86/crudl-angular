@@ -1,1 +1,11 @@
-<app-table></app-table>
+<form [formGroup]="searchForm">
+  <mat-form-field class="form-field" appearance="outline">
+    <mat-label> Search by name
+    </mat-label>
+    <input matInput formControlName="name" type="text">
+  </mat-form-field>
+</form>
+<button class="float-button" mat-fab color="accent" (click)="addHero()" aria-label="Add new Hero">
+  <mat-icon>add</mat-icon>
+</button>
+<app-table [searchInput]="searchForm.value.name"></app-table>

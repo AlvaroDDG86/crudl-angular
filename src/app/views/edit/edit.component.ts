@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { HeroesService } from '../../services/heroes.service';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { mergeMap, switchMap } from 'rxjs/operators';
 import { Hero } from '../../models/Hero';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -60,5 +60,9 @@ export class EditComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 3000,
     });
+  }
+
+  goBack() {
+    this.router.navigate(['/list'])
   }
 }

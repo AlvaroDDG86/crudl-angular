@@ -1,18 +1,27 @@
-<div class="container">
-  <div class="form-container">
-    <form [formGroup]="heroForm" (submit)="submit()">
-      <mat-form-field class="form-field" appearance="outline">
-        <mat-label> Name
-        </mat-label>
-        <input matInput formControlName="name" type="text">
-        <mat-error *ngIf="heroForm.controls.name.touched && heroForm.controls.name.invalid">
-          <span>This field is mandatory.</span>
-        </mat-error>
-      </mat-form-field>
-      <div class="button-row">
-        <button mat-raised-button color="warn" type="button" (click)="cancelEdit()">Cancel</button>
-        <button mat-raised-button color="accent" type="submit">Save</button>
-      </div>
-    </form>
-  </div>
-</div>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Editting Hero: {{original.name}}</mat-card-title>
+    <mat-card-subtitle>Id: {{original.id}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="form-container">
+      <form [formGroup]="heroForm" (submit)="submit()">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label> Name
+          </mat-label>
+          <input matInput formControlName="name" type="text">
+          <mat-error *ngIf="heroForm.controls.name.touched && heroForm.controls.name.invalid">
+            <span>This field is mandatory.</span>
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button mat-raised-button color="warn" type="button" (click)="cancelEdit()">Cancel</button>
+    <button mat-raised-button color="accent" type="submit">Save</button>
+  </mat-card-actions>
+</mat-card>
