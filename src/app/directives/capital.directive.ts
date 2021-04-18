@@ -11,7 +11,9 @@ export class CapitalDirective implements DoCheck {
   ngDoCheck() {
     if (this.ngControl) {
       const value = this.ngControl.control?.value;
-      this.ngControl.control?.setValue(value.charAt(0).toUpperCase() + value.slice(1))
+      if (isNaN(value)) {
+        this.ngControl.control?.setValue(value.charAt(0).toUpperCase() + value.slice(1))
+      }
     }
   }
 }

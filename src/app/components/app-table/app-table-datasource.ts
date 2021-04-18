@@ -1,36 +1,55 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { catchError, finalize, map } from 'rxjs/operators';
+import { catchError, finalize, map, switchMap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge, BehaviorSubject, of } from 'rxjs';
 import { Hero } from '../../models/Hero';
 import { HeroesService } from '../../services/heroes.service';
 
 export class AppTableDataSource extends DataSource<Hero> {
-  private heroesSubject = new BehaviorSubject<Hero[]>([]);
   paginator: MatPaginator | undefined;
+  private searchName = new BehaviorSubject<string>('');
 
   constructor(private heroesService: HeroesService) {
     super();
   }
 
   connect(): Observable<Hero[]> {
-    return this.heroesSubject.asObservable();
+
+    return this.searchName.pipe(
+      switchMap(searchVale => {
+        return this.heroesService.getHeroes(searchVale)
+          .pipe(
+            switchMap(
+              res => {
+                if (this.paginator) {
+                  return merge(observableOf(res), this.paginator.page)
+                    .pipe(map(() => {
+                      return this.getPagedData([...res ]);
+                    }));
+                } else {
+                  throw Error('Error')
+                }
+              }
+            )
+          )
+      })
+    )
   }
 
-  disconnect(): void {
-    this.heroesSubject.complete();
-  }
+  disconnect(): void {}
 
-  loadHeroes(filter?: string) {
-    if (filter) {
-      return this.heroesService.getHeroesByName(filter).pipe(
-        catchError(() => of([]))
-      ).pipe(map(heroes => this.heroesSubject.next(heroes)));
+  private getPagedData(data: Hero[]): Hero[] {
+    if (this.paginator) {
+      this.paginator.length = data.length;
+      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+      return data.splice(startIndex, this.paginator.pageSize);
     } else {
-      return this.heroesService.getHeroes().pipe(
-        catchError(() => of([]))
-      ).pipe(map(heroes => this.heroesSubject.next(heroes)));
+      return data;
     }
+  }
+
+  filterData(value: string) {
+    this.searchName.next(value)
   }
 }

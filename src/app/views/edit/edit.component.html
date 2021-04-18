@@ -14,6 +14,25 @@
             <span>This field is mandatory.</span>
           </mat-error>
         </mat-form-field>
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label> Alter Ego
+          </mat-label>
+          <input matInput formControlName="alterHego" type="text">
+        </mat-form-field>
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label> Publisher
+          </mat-label>
+          <mat-select formControlName="publisher">
+            <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">
+              {{publisher.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label> Place of Birth
+          </mat-label>
+          <input matInput formControlName="placeOfBirth" type="text">
+        </mat-form-field>
       </form>
     </div>
   </mat-card-content>

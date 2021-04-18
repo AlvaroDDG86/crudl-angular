@@ -18,7 +18,7 @@ export class HeroesService {
    * Return a list of all heroes
    */
   getHeroes(filter?: string): Observable<Hero[]> {
-    const url = `${BASE_URL}/heroes${filter ? '?name_like=' + filter + '&' : '?'}${'_page=1&_limit=5'}`
+    const url = `${BASE_URL}/heroes${filter ? '?name_like=' + filter : ''}`
     return this.http.get<Hero[]>(url)
   }
 
@@ -32,10 +32,10 @@ export class HeroesService {
     return this.http.get<Hero[]>(url)
       .pipe(
         switchMap((res: Hero[]) => {
-          if (res.length > 0) {
+          if (res.length > 0) { // Hero find
             return of(res[0])
           } else {
-            return of({
+            return of({ // No Hero find
               id: 0,
               name: ''
             })
@@ -52,7 +52,7 @@ export class HeroesService {
   addHero(hero: Hero): Observable<Hero> {
     return this.getHeroes().pipe(
       switchMap((res: Hero[]) => {
-        let id = res.length > 0 ? (Math.max(...res.map(hero => hero.id)) + 1) : 1;
+        let id = res.length > 0 ? (Math.max(...res.map(hero => hero.id)) + 1) : 1; // Get new ID
         const url = `${BASE_URL}/heroes`
         return this.http.post<Hero>(url, { ...hero, id })
      })

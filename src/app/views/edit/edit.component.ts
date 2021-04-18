@@ -7,6 +7,8 @@ import { Hero } from '../../models/Hero';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { SnackbarService } from '../../services/snackbar.service';
+import { Publisher } from '../../models/Publisher';
+import { PublisherService } from '../../services/publisher.service';
 
 @Component({
   selector: 'app-edit',
@@ -18,13 +20,18 @@ export class EditComponent implements OnInit {
   original: any;
   heroForm: FormGroup = this.fb.group({
     id: [''],
-    name: ['', Validators.required]
+    name: ['', Validators.required],
+    alterHego: [''],
+    publisher: [''],
+    placeOfBirth: ['']
   })
+  publishers: Publisher[] = []
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private fb: FormBuilder,
               private heroService: HeroesService,
+              private publisherServices: PublisherService,
               private snackbarService: SnackbarService) {
             }
 
@@ -43,6 +50,7 @@ export class EditComponent implements OnInit {
       },
       err => console.log(err)
     )
+    this.publisherServices.getPublishers().subscribe((res: Publisher[]) => this.publishers = res)
   }
 
   cancelEdit() {

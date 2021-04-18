@@ -35,7 +35,8 @@ import { AppDialogComponent } from './components/app-dialog/app-dialog.component
 import { HttpInterceptorInterceptor } from './interceptors/http-interceptor.interceptor'
 import { NgxSpinnerModule } from "ngx-spinner";
 import { CapitalDirective } from './directives/capital.directive';
-import { TablaBorrarComponent } from './tabla-borrar/tabla-borrar.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -49,8 +50,7 @@ import { TablaBorrarComponent } from './tabla-borrar/tabla-borrar.component';
     MainComponent,
     AppTableComponent,
     AppDialogComponent,
-    CapitalDirective,
-    TablaBorrarComponent
+    CapitalDirective
   ],
   imports: [
     BrowserModule,
@@ -74,6 +74,8 @@ import { TablaBorrarComponent } from './tabla-borrar/tabla-borrar.component';
     MatInputModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    MatOptionModule,
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule

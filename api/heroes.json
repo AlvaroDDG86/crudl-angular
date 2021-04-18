@@ -1,68 +1,46 @@
 {
   "heroes": [
     {
-      "id": 4,
-      "name": "Fermin"
-    },
-    {
       "id": 5,
-      "name": "Alvaro"
+      "name": "Superman",
+      "alterHego": "Klark Ken",
+      "publisher": 2,
+      "placeOfBirth": ""
     },
     {
-      "id": 11,
-      "name": "Manolo"
+      "id": 2,
+      "name": "Batman",
+      "alterHego": "Bruce Wayne",
+      "publisher": 2,
+      "placeOfBirth": "Gotham city"
     },
     {
-      "id": 14,
-      "name": "Julian"
+      "id": 3,
+      "name": "Spiderman",
+      "alterHego": "",
+      "publisher": 1,
+      "placeOfBirth": ""
     },
     {
-      "id": 15,
-      "name": "Álvaro"
+      "id": 4,
+      "name": "Hulk"
     },
     {
-      "id": 21,
-      "name": "Manolo 3"
+      "id": 6,
+      "name": "Jack Sparrow",
+      "alterHego": "Dani de vito",
+      "publisher": 2,
+      "placeOfBirth": "Caribean"
+    }
+  ],
+  "publishers": [
+    {
+      "id": 1,
+      "name": "DC Comics"
     },
     {
-      "id": 24,
-      "name": "Julian"
-    },
-    {
-      "id": 25,
-      "name": "Álvaro"
-    },
-    {
-      "id": 31,
-      "name": "Manolo"
-    },
-    {
-      "id": 34,
-      "name": "Julian"
-    },
-    {
-      "id": 35,
-      "name": "Álvaro"
-    },
-    {
-      "id": 36,
-      "name": "Hero name"
-    },
-    {
-      "id": 37,
-      "name": "Manolo"
-    },
-    {
-      "id": 38,
-      "name": "Ernesto"
-    },
-    {
-      "id": 39,
-      "name": "Manolo"
-    },
-    {
-      "id": 40,
-      "name": "Hero name"
+      "id": 2,
+      "name": "Marvel"
     }
   ]
 }

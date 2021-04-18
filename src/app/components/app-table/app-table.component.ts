@@ -1,13 +1,15 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTable } from '@angular/material/table';
 import { AppTableDataSource } from './app-table-datasource';
 import { HeroesService } from '../../services/heroes.service';
 import { Hero } from '../../models/Hero';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { AppDialogComponent } from '../app-dialog/app-dialog.component';
+import { SnackbarService } from '../../services/snackbar.service';
+import { PublisherService } from '../../services/publisher.service';
+import { Publisher } from '../../models/Publisher';
 
 @Component({
   selector: 'app-table',
@@ -17,18 +19,20 @@ import { AppDialogComponent } from '../app-dialog/app-dialog.component';
 export class AppTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatTable) table!: MatTable<Hero>;
+  _searchInput: string = ''
   @Input() set searchInput(value: string) {
-    this.dataSource.loadHeroes(value).subscribe((res: any) => {
-      // ¿?
-    })
+    this._searchInput = value;
+    // Actualizar lista
+    this.dataSource.filterData(value);
   }
 
   dataSource: AppTableDataSource;
-  totalLength: number = 10;
-  displayedColumns = ['id', 'name', 'actions'];
+  displayedColumns = ['actions', 'name', 'alterHego', 'publisher', 'placeOfBirth'];
+  publishers: Publisher[] = [];
 
   constructor(private heroesService: HeroesService,
-    private _snackBar: MatSnackBar,
+    private publisherServices: PublisherService,
+    private snackbarService: SnackbarService,
     public dialog: MatDialog,
     private router: Router) {
     this.dataSource = new AppTableDataSource(this.heroesService);
@@ -36,9 +40,7 @@ export class AppTableComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.loadHeroes().subscribe((res: any) => {
-      // ¿?
-    })
+    this.publisherServices.getPublishers().subscribe((res: Publisher[]) => this.publishers = res)
   }
 
   openDeleteRow(row: Hero) {
@@ -49,26 +51,23 @@ export class AppTableComponent implements AfterViewInit {
       }
     });
 
-    // Solucionar esto
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.heroesService.deleteHero(row.id).subscribe(() => {
-          this._snackBar.open(`Hero was deleted`, 'Acept', {
-            duration: 3000,
-          });
-          this.dataSource.loadHeroes().subscribe(() => {
-            // ¿?
-          })
+          this.snackbarService.openSnackBar(`Hero has been deleted`, 'Acept', 'info', 4000)
+          this.dataSource.filterData(this._searchInput);
         })
       }
     });
   }
 
-  deleteRow(row: Hero) {
-
+  editRow(row: Hero) {
+    sessionStorage.setItem('filterName', this._searchInput)
+    this.router.navigate(['/edit', row.id]);
   }
 
-  editRow(row: Hero) {
-    this.router.navigate(['/edit', row.id]);
+  getPublisherName(row: Hero) {
+    const publisher = this.publishers.find(pb => pb.id === row.publisher)
+    return publisher ? publisher.name : ''
   }
 }
