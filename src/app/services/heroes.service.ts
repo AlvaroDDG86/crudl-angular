@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Hero } from '../models/Hero';
-import { mergeAll } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { mergeAll, switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
 
 const BASE_URL = '/api'
 
@@ -16,18 +17,8 @@ export class HeroesService {
   /**
    * Return a list of all heroes
    */
-  getHeroes(): Observable<Hero[]> {
-    const url = `${BASE_URL}/heroes`
-    return this.http.get<Hero[]>(url)
-  }
-
-  /**
-   *
-   * @param name name to filter
-   * Return a list of heroes filtered
-   */
-  getHeroesByName(name: string): Observable<Hero[]> {
-    const url = `${BASE_URL}/heroes?name_like=${name}`
+  getHeroes(filter?: string): Observable<Hero[]> {
+    const url = `${BASE_URL}/heroes${filter ? '?name_like=' + filter + '&' : '?'}${'_page=1&_limit=5'}`
     return this.http.get<Hero[]>(url)
   }
 
@@ -38,7 +29,19 @@ export class HeroesService {
    */
   getHeroById(id: String | null): Observable<Hero> {
     const url = `${BASE_URL}/heroes?id=${id}`
-    return this.http.get<Hero[]>(url).pipe(mergeAll())
+    return this.http.get<Hero[]>(url)
+      .pipe(
+        switchMap((res: Hero[]) => {
+          if (res.length > 0) {
+            return of(res[0])
+          } else {
+            return of({
+              id: 0,
+              name: ''
+            })
+          }
+        })
+      )
   }
 
   /**
@@ -47,8 +50,13 @@ export class HeroesService {
    * Add Hero to  DB
    */
   addHero(hero: Hero): Observable<Hero> {
-    const url = `${BASE_URL}/heroes`
-    return this.http.post<Hero>(url, hero)
+    return this.getHeroes().pipe(
+      switchMap((res: Hero[]) => {
+        let id = res.length > 0 ? (Math.max(...res.map(hero => hero.id)) + 1) : 1;
+        const url = `${BASE_URL}/heroes`
+        return this.http.post<Hero>(url, { ...hero, id })
+     })
+    )
   }
 
   /**

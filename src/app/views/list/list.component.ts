@@ -16,6 +16,9 @@ export class ListComponent implements OnInit {
             private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.searchForm.patchValue({
+      name: sessionStorage.getItem('filterName') ? sessionStorage.getItem('filterName') : ''
+    })
   }
 
   addHero() {

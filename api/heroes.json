@@ -1,16 +1,12 @@
 {
   "heroes": [
     {
-      "id": 1,
-      "name": "Hola"
-    },
-    {
       "id": 4,
-      "name": "Julianin"
+      "name": "Fermin"
     },
     {
       "id": 5,
-      "name": "Álvaro"
+      "name": "Alvaro"
     },
     {
       "id": 11,
@@ -47,6 +43,26 @@
     {
       "id": 35,
       "name": "Álvaro"
+    },
+    {
+      "id": 36,
+      "name": "Hero name"
+    },
+    {
+      "id": 37,
+      "name": "Manolo"
+    },
+    {
+      "id": 38,
+      "name": "Ernesto"
+    },
+    {
+      "id": 39,
+      "name": "Manolo"
+    },
+    {
+      "id": 40,
+      "name": "Hero name"
     }
   ]
 }

@@ -34,6 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppDialogComponent } from './components/app-dialog/app-dialog.component';
 import { HttpInterceptorInterceptor } from './interceptors/http-interceptor.interceptor'
 import { NgxSpinnerModule } from "ngx-spinner";
+import { CapitalDirective } from './directives/capital.directive';
+import { TablaBorrarComponent } from './tabla-borrar/tabla-borrar.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     AboutComponent,
     MainComponent,
     AppTableComponent,
-    AppDialogComponent
+    AppDialogComponent,
+    CapitalDirective,
+    TablaBorrarComponent
   ],
   imports: [
     BrowserModule,
