@@ -16,9 +16,9 @@ export class ListComponent implements OnInit {
   @ViewChild(AppTableComponent) appTableRef?: AppTableComponent;
 
   constructor(private router: Router,
-            private fb: FormBuilder,
-            private heroesService: HeroesService,
-            private snackbarService: SnackbarService) {
+              private fb: FormBuilder,
+              private heroesService: HeroesService,
+              private snackbarService: SnackbarService) {
             }
 
   ngOnInit(): void {
@@ -32,7 +32,8 @@ export class ListComponent implements OnInit {
   }
 
   deleteRow(event: number) {
-    this.heroesService.deleteHero(event).subscribe(() => {
+    this.heroesService.deleteHero(event).subscribe((res: any) => {
+      console.log(res);
       this.snackbarService.openSnackBar(`Hero has been deleted`, 'Acept', 'info', 4000)
       if (this.appTableRef) {
         this.appTableRef.refreshTable();

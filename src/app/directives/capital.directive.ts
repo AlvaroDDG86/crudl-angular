@@ -1,4 +1,4 @@
-import { Directive, DoCheck, ElementRef } from '@angular/core';
+import { Directive, DoCheck } from '@angular/core';
 import { NgControl } from '@angular/forms';
 
 @Directive({

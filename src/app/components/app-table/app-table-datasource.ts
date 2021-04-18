@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { catchError, finalize, map, switchMap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge, BehaviorSubject, of } from 'rxjs';
-import { Hero } from '../../models/Hero';
+import { Hero } from '../../models/Hero.model';
 import { HeroesService } from '../../services/heroes.service';
 
 export class AppTableDataSource extends DataSource<Hero> {

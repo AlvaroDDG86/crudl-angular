@@ -1,16 +1,14 @@
 import { AfterViewInit, Component, Input, Output, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTable } from '@angular/material/table';
 import { AppTableDataSource } from './app-table-datasource';
 import { HeroesService } from '../../services/heroes.service';
-import { Hero } from '../../models/Hero';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { AppDialogComponent } from '../app-dialog/app-dialog.component';
-import { SnackbarService } from '../../services/snackbar.service';
 import { PublisherService } from '../../services/publisher.service';
-import { Publisher } from '../../models/Publisher';
+import { MatDialog } from '@angular/material/dialog';
+import { Hero } from '../../models/Hero.model';
+import { Publisher } from '../../models/Publisher.model';
 import { EventEmitter } from '@angular/core';
+import { AppDialogComponent } from '../app-dialog/app-dialog.component';
 
 @Component({
   selector: 'app-table',

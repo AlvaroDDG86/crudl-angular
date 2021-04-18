@@ -1,13 +1,6 @@
 {
   "heroes": [
     {
-      "id": 2,
-      "name": "Hero name",
-      "alterHego": "",
-      "publisher": "",
-      "placeOfBirth": ""
-    },
-    {
       "id": 3,
       "name": "Superman",
       "alterHego": "Clark Ken",
@@ -20,6 +13,34 @@
       "alterHego": "Bruce Weyne",
       "publisher": 2,
       "placeOfBirth": "Gotham"
+    },
+    {
+      "id": 6,
+      "name": "Hero name",
+      "alterHego": "",
+      "publisher": "",
+      "placeOfBirth": ""
+    },
+    {
+      "id": 7,
+      "name": "Hero name",
+      "alterHego": "",
+      "publisher": "",
+      "placeOfBirth": ""
+    },
+    {
+      "id": 8,
+      "name": "Hero name",
+      "alterHego": "",
+      "publisher": "",
+      "placeOfBirth": ""
+    },
+    {
+      "id": 9,
+      "name": "Hero name",
+      "alterHego": "",
+      "publisher": "",
+      "placeOfBirth": ""
     }
   ],
   "publishers": [

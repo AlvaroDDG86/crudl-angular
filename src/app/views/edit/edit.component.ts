@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HeroesService } from '../../services/heroes.service';
-import { Observable, of as observableOf, of } from 'rxjs';
-import { mergeMap, switchMap } from 'rxjs/operators';
-import { Hero } from '../../models/Hero';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import { SnackbarService } from '../../services/snackbar.service';
-import { Publisher } from '../../models/Publisher';
 import { PublisherService } from '../../services/publisher.service';
+import { Publisher } from '../../models/Publisher.model';
 
 @Component({
   selector: 'app-edit',

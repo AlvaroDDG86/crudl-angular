@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Publisher } from '../models/Publisher';
+import { Publisher } from '../models/Publisher.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
