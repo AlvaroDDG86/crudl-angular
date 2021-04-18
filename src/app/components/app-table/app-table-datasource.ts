@@ -8,7 +8,7 @@ import { HeroesService } from '../../services/heroes.service';
 
 export class AppTableDataSource extends DataSource<Hero> {
   paginator: MatPaginator | undefined;
-  private searchName = new BehaviorSubject<string>('');
+  private searchName = new BehaviorSubject<string>(''); // Subscribe for input update
 
   constructor(private heroesService: HeroesService) {
     super();
@@ -23,7 +23,7 @@ export class AppTableDataSource extends DataSource<Hero> {
             switchMap(
               res => {
                 if (this.paginator) {
-                  return merge(observableOf(res), this.paginator.page)
+                  return merge(observableOf(res), this.paginator.page) // Each time heroes or pagination change, this pipe is fired
                     .pipe(map(() => {
                       return this.getPagedData([...res ]);
                     }));

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, Output, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTable } from '@angular/material/table';
 import { AppTableDataSource } from './app-table-datasource';
@@ -10,6 +10,7 @@ import { AppDialogComponent } from '../app-dialog/app-dialog.component';
 import { SnackbarService } from '../../services/snackbar.service';
 import { PublisherService } from '../../services/publisher.service';
 import { Publisher } from '../../models/Publisher';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -22,52 +23,47 @@ export class AppTableComponent implements AfterViewInit {
   _searchInput: string = ''
   @Input() set searchInput(value: string) {
     this._searchInput = value;
-    // Actualizar lista
     this.dataSource.filterData(value);
   }
-
+  @Input() displayedColumns: string[] = [];
+  @Output() deleteEvent: EventEmitter<number> = new EventEmitter<number>();
+  @Output() editEvent: EventEmitter<number> = new EventEmitter<number>();
   dataSource: AppTableDataSource;
-  displayedColumns = ['actions', 'name', 'alterHego', 'publisher', 'placeOfBirth'];
-  publishers: Publisher[] = [];
+  private _publishers: Publisher[] = [];
 
   constructor(private heroesService: HeroesService,
     private publisherServices: PublisherService,
-    private snackbarService: SnackbarService,
-    public dialog: MatDialog,
-    private router: Router) {
+    public dialog: MatDialog) {
     this.dataSource = new AppTableDataSource(this.heroesService);
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.publisherServices.getPublishers().subscribe((res: Publisher[]) => this.publishers = res)
+    this.publisherServices.getPublishers().subscribe((res: Publisher[]) => this._publishers = res)
   }
 
   openDeleteRow(row: Hero) {
     const dialogRef = this.dialog.open(AppDialogComponent, {
       data: {
         title: 'Delete',
-        message: `Are you to delete the Hero ${row.name}?`
+        message: `Are you to delete ${row.name}?`
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.heroesService.deleteHero(row.id).subscribe(() => {
-          this.snackbarService.openSnackBar(`Hero has been deleted`, 'Acept', 'info', 4000)
-          this.dataSource.filterData(this._searchInput);
-        })
-      }
-    });
+    dialogRef.afterClosed().subscribe(result => result && this.deleteEvent.emit(row.id));
   }
 
   editRow(row: Hero) {
     sessionStorage.setItem('filterName', this._searchInput)
-    this.router.navigate(['/edit', row.id]);
+    this.editEvent.emit(row.id)
   }
 
   getPublisherName(row: Hero) {
-    const publisher = this.publishers.find(pb => pb.id === row.publisher)
-    return publisher ? publisher.name : ''
+    const publisher = this._publishers.find(pb => pb.id === row.publisher)
+    return publisher ? publisher.name : '--'
+  }
+
+  refreshTable() {
+    this.dataSource.filterData(this._searchInput);
   }
 }

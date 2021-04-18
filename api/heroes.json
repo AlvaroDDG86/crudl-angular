@@ -1,36 +1,25 @@
 {
   "heroes": [
     {
-      "id": 5,
-      "name": "Superman",
-      "alterHego": "Klark Ken",
-      "publisher": 2,
-      "placeOfBirth": ""
-    },
-    {
       "id": 2,
-      "name": "Batman",
-      "alterHego": "Bruce Wayne",
-      "publisher": 2,
-      "placeOfBirth": "Gotham city"
+      "name": "Hero name",
+      "alterHego": "",
+      "publisher": "",
+      "placeOfBirth": ""
     },
     {
       "id": 3,
-      "name": "Spiderman",
-      "alterHego": "",
+      "name": "Superman",
+      "alterHego": "Clark Ken",
       "publisher": 1,
-      "placeOfBirth": ""
+      "placeOfBirth": "New York"
     },
     {
-      "id": 4,
-      "name": "Hulk"
-    },
-    {
-      "id": 6,
-      "name": "Jack Sparrow",
-      "alterHego": "Dani de vito",
+      "id": 5,
+      "name": "Batman",
+      "alterHego": "Bruce Weyne",
       "publisher": 2,
-      "placeOfBirth": "Caribean"
+      "placeOfBirth": "Gotham"
     }
   ],
   "publishers": [

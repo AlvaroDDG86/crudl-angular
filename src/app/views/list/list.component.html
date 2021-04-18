@@ -8,4 +8,9 @@
 <button class="float-button" mat-fab color="accent" (click)="addHero()" aria-label="Add new Hero">
   <mat-icon>add</mat-icon>
 </button>
-<app-table [searchInput]="searchForm.value.name"></app-table>
+<app-table
+  [searchInput]="searchForm.value.name"
+  [displayedColumns]="['actions', 'name', 'alterHego', 'publisher', 'placeOfBirth']"
+  (deleteEvent)="deleteRow($event)"
+  (editEvent)="editRow($event)"
+  ></app-table>
