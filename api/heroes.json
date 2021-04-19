@@ -4,7 +4,7 @@
       "id": 3,
       "name": "Superman",
       "alterHego": "Clark Ken",
-      "publisher": 1,
+      "publisher": 2,
       "placeOfBirth": "New York"
     },
     {
@@ -29,13 +29,6 @@
       "placeOfBirth": ""
     },
     {
-      "id": 8,
-      "name": "Hero name",
-      "alterHego": "",
-      "publisher": "",
-      "placeOfBirth": ""
-    },
-    {
       "id": 9,
       "name": "Hero name",
       "alterHego": "",
@@ -44,6 +37,13 @@
     },
     {
       "id": 10,
+      "name": "Hero name",
+      "alterHego": "",
+      "publisher": "",
+      "placeOfBirth": ""
+    },
+    {
+      "id": 11,
       "name": "Hero name",
       "alterHego": "",
       "publisher": "",

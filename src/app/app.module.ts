@@ -9,15 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Views
 import { AppComponent } from './app.component';
-import { ListComponent } from './views/list/list.component';
-import { AboutComponent } from './views/about/about.component';
-import { MainComponent } from './views/main/main.component';
-import { EditComponent } from './views/edit/edit.component';
 
-// Components
-import { AppNavigationComponent } from './components/app-navigation/app-navigation.component';
-import { AppDashboardComponent } from './components/app-dashboard/app-dashboard.component';
-import { AppTableComponent } from './components/app-table/app-table.component';
+// Dialog
 import { AppDialogComponent } from './components/app-dialog/app-dialog.component';
 
 // Miscelania
@@ -27,38 +20,13 @@ import { CapitalDirective } from './directives/capital.directive';
 
 // Material
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatInputModule } from '@angular/material/input';
-
+import { ViewsModule } from './views/views.module';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppNavigationComponent,
-    AppDashboardComponent,
-    AppTableComponent,
-    AppDialogComponent,
-    CapitalDirective,
-    ListComponent,
-    EditComponent,
-    AboutComponent,
-    MainComponent
+    CapitalDirective
   ],
   imports: [
     BrowserModule,
@@ -69,24 +37,8 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    MatToolbarModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatOptionModule
+    ViewsModule,
+    ComponentsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true }
