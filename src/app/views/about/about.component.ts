@@ -12,4 +12,8 @@ export class AboutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openGithub() {
+    window.open('https://github.com/AlvaroDDG86/crudl-angular', '_blanck')
+  }
+
 }

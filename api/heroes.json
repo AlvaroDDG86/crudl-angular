@@ -11,7 +11,7 @@
       "id": 5,
       "name": "Batman",
       "alterHego": "Bruce Weyne",
-      "publisher": 2,
+      "publisher": 1,
       "placeOfBirth": "Gotham"
     },
     {
@@ -37,6 +37,13 @@
     },
     {
       "id": 9,
+      "name": "Hero name",
+      "alterHego": "",
+      "publisher": "",
+      "placeOfBirth": ""
+    },
+    {
+      "id": 10,
       "name": "Hero name",
       "alterHego": "",
       "publisher": "",

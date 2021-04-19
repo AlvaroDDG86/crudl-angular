@@ -32,8 +32,7 @@ export class ListComponent implements OnInit {
   }
 
   deleteRow(event: number) {
-    this.heroesService.deleteHero(event).subscribe((res: any) => {
-      console.log(res);
+    this.heroesService.deleteHero(event).subscribe(() => {
       this.snackbarService.openSnackBar(`Hero has been deleted`, 'Acept', 'info', 4000)
       if (this.appTableRef) {
         this.appTableRef.refreshTable();
