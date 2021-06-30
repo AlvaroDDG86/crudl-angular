@@ -18,7 +18,7 @@ export class AppTableDataSource extends DataSource<Hero> {
 
     return this.searchName.pipe(
       switchMap(searchVale => {
-        return this.heroesService.getHeroes(searchVale)
+        return this.heroesService.getFirebaseHeroes(searchVale)
           .pipe(
             switchMap(
               res => {

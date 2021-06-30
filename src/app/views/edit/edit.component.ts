@@ -35,7 +35,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => params.get('id') !== 'new' ? this.heroService.getHeroById(params.get('id')) : of({ id: -1, name: 'Hero name' }))
+      switchMap((params: ParamMap) => params.get('id') !== 'new' ? this.heroService.getFirebaseHeroeById(params.get('id')) : of({ id: -1, name: 'Hero name' }))
     ).subscribe(
       res => {
         if(res.id === 0) {
@@ -48,7 +48,7 @@ export class EditComponent implements OnInit {
       },
       err => console.log(err)
     )
-    this.publisherServices.getPublishers().subscribe((res: Publisher[]) => this.publishers = res)
+    this.publisherServices.getFirebasePublishers().subscribe((res: Publisher[]) => this.publishers = res)
   }
 
   cancelEdit() {

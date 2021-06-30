@@ -24,8 +24,8 @@ export class AppTableComponent implements AfterViewInit {
     this.dataSource.filterData(value);
   }
   @Input() displayedColumns: string[] = [];
-  @Output() deleteEvent: EventEmitter<number> = new EventEmitter<number>();
-  @Output() editEvent: EventEmitter<number> = new EventEmitter<number>();
+  @Output() deleteEvent: EventEmitter<Hero> = new EventEmitter<Hero>();
+  @Output() editEvent: EventEmitter<Hero> = new EventEmitter<Hero>();
   dataSource: AppTableDataSource;
   private _publishers: Publisher[] = [];
 
@@ -37,7 +37,7 @@ export class AppTableComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.publisherServices.getPublishers().subscribe((res: Publisher[]) => this._publishers = res)
+    this.publisherServices.getFirebasePublishers().subscribe((res: Publisher[]) => this._publishers = res)
   }
 
   openDeleteRow(row: Hero) {
@@ -48,12 +48,12 @@ export class AppTableComponent implements AfterViewInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => result && this.deleteEvent.emit(row.id));
+    dialogRef.afterClosed().subscribe(result => result && this.deleteEvent.emit(row));
   }
 
   editRow(row: Hero) {
     sessionStorage.setItem('filterName', this._searchInput)
-    this.editEvent.emit(row.id)
+    this.editEvent.emit(row)
   }
 
   getPublisherName(row: Hero) {

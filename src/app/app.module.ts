@@ -23,6 +23,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ViewsModule } from './views/views.module';
 import { ComponentsModule } from './components/components.module';
 
+// Firebase
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +42,8 @@ import { ComponentsModule } from './components/components.module';
     ReactiveFormsModule,
     NgxSpinnerModule,
     ViewsModule,
-    ComponentsModule
+    ComponentsModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true }

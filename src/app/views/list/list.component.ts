@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HeroesService } from '../../services/heroes.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { AppTableComponent } from '../../components/app-table/app-table.component';
+import { Hero } from 'src/app/models/Hero.model';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -31,8 +32,9 @@ export class ListComponent implements OnInit {
     this.router.navigate(['/edit', 'new'])
   }
 
-  deleteRow(event: number) {
-    this.heroesService.deleteHero(event).subscribe(() => {
+  deleteRow(event: Hero) {
+    debugger
+    this.heroesService.deleteFirebaseHero(event.id).then(() => {
       this.snackbarService.openSnackBar(`Hero has been deleted`, 'Acept', 'info', 4000)
       if (this.appTableRef) {
         this.appTableRef.refreshTable();
@@ -40,7 +42,7 @@ export class ListComponent implements OnInit {
     })
   }
 
-  editRow(event: number) {
-    this.router.navigate(['/edit', event]);
+  editRow(event: Hero) {
+    this.router.navigate(['/edit', event.id]);
   }
 }
