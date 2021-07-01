@@ -2,6 +2,6 @@ export interface Hero {
   id: string;
   name: string;
   alterHego?: string;
-  publisher?: number;
+  publisher?: string;
   placeOfBirth?: string;
 }

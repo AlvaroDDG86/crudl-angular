@@ -33,7 +33,6 @@ export class ListComponent implements OnInit {
   }
 
   deleteRow(event: Hero) {
-    debugger
     this.heroesService.deleteFirebaseHero(event.id).then(() => {
       this.snackbarService.openSnackBar(`Hero has been deleted`, 'Acept', 'info', 4000)
       if (this.appTableRef) {

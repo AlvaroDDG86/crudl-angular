@@ -62,18 +62,18 @@ export class EditComponent implements OnInit {
       return;
     }
     if (this.original.id !== -1) {
-      this.heroService.updateHero(this.heroForm.value).subscribe(res => {
-        if (res) {
-          this.snackbarService.openSnackBar(`Hero ${res.name} saved`, 'Accept', 'success')
-          this.router.navigate(['/list',]);
-        }
+      this.heroService.editFirebaseHero(this.heroForm.value).then(res => {
+        this.snackbarService.openSnackBar(`Hero saved`, 'Acept', 'success')
+        this.router.navigate(['/list',]);
+      }).catch(err => {
+        this.snackbarService.openSnackBar('Error when editting a Hero', 'Acept', 'error')
       })
     } else {
-      this.heroService.addHero(this.heroForm.value).subscribe(res => {
-        if (res) {
-          this.snackbarService.openSnackBar(`New Hero ${res.name} created`, 'Accept', 'success')
-          this.router.navigate(['/list',]);
-        }
+      this.heroService.addFirebaseHero(this.heroForm.value).then(res => {
+        this.snackbarService.openSnackBar(`New Hero created`, 'Acept', 'success')
+        this.router.navigate(['/list',]);
+      }).catch(err => {
+        this.snackbarService.openSnackBar('Error when creating a Hero', 'Acept', 'error')
       })
     }
   }

@@ -23,8 +23,14 @@ export class PublisherService {
   }
 
   getFirebasePublishers(): Observable<any[]> {
-    return this.firestore.collection('publishers').valueChanges().pipe(
-      map((res: any) => this.fbparser.parseObjectAddingId(res))
-    )
+    return this.firestore.collection<Publisher>('publishers').snapshotChanges().pipe(
+      map(actions => {
+      return actions.map(a => {
+          const data = a.payload.doc.data() as Publisher;
+          data.id = a.payload.doc.id;
+          return data
+      });
+    })
+  );
   }
 }
